@@ -1,7 +1,0 @@
-# 1. Sistema e Runtime (A base do executável)
-
-gcc -m64 -ffreestanding -fno-stack-protector -fno-pie -c system/crt0.c -o system/crt0.o
-gcc -m64 -ffreestanding -fno-stack-protector -fno-pie -I. -c system/string.c -o system/string.o
-gcc -m64 -ffreestanding -fno-stack-protector -fno-pie -I. -c system/malloc.c -o system/malloc.o
-gcc -m64 -ffreestanding -fno-stack-protector -fno-pie -I. -c system/graphics.c -o system/graphics.o
-gcc -m64 -ffreestanding -fno-stack-protector -fno-pie -I. -c system/fonts.c -o system/fonts.o
