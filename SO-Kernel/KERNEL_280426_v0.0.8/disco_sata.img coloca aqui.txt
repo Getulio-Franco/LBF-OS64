@@ -1,0 +1,1 @@
+coloque o disco .img aqui o nome pode ser disco_sata.img, tem que gerar ele tem um documento explicando como fazer.

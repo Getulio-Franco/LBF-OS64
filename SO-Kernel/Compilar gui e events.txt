@@ -1,0 +1,18 @@
+-------------Eventos inicio--------------------------
+gcc -m64 -ffreestanding -fno-stack-protector -fno-pie -I. -c events/cursor_engine.c -o events/cursor_engine.o
+
+gcc -m64 -ffreestanding -fno-stack-protector -fno-pie -I. -c events/input_events.c -o events/input_events.o
+
+gcc -m64 -ffreestanding -fno-stack-protector -fno-pie -I. -c events/mouse_geometry.c -o events/mouse_geometry.o
+-------------Eventos fim-----------------------------
+
+-------------Complemento gui-------------------------
+gcc -m64 -ffreestanding -fno-stack-protector -fno-pie -I. -c gui/gui_interaction.c -o gui/gui_interaction.o
+
+gcc -m64 -ffreestanding -fno-stack-protector -fno-pie -I. -c gui/window_drag.c -o gui/window_drag.o
+
+gcc -m64 -ffreestanding -fno-stack-protector -fno-pie -I. -c gui/z_order.c -o gui/z_order.o
+
+gcc -m64 -ffreestanding -fno-stack-protector -fno-pie -I. -c gui/wm.c -o gui/wm.o
+
+gcc -m64 -ffreestanding -fno-stack-protector -fno-pie -I. -c gui/gui.c -o gui/gui.o
