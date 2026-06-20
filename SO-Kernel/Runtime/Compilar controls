@@ -1,0 +1,1 @@
+gcc -m64 -ffreestanding -fno-stack-protector -fno-pie -c controls.c -o controls.o
