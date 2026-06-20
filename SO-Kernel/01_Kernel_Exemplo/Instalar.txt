@@ -1,0 +1,41 @@
+🛠️ Como Compilar e Montar a Imagem do LBF OS
+Para testar o LBF OS no VirtualBox ou em hardware real, precisamos unir os binários compilados (boot.bin e kernel.bin), empacotar os programas de usuário (.elf) em um sistema de arquivos FAT32 e gerar a imagem final.
+Parte 1: Script Bash para Criação da Imagem Raw (.img)
+Se você estiver no Linux (ou WSL), execute os comandos abaixo para gerar o disco_total.img:
+Bash
+# 1. Cria a imagem do disco de dados (FAT32) e formata
+
+rm -f ssd.img
+dd if=/dev/zero of=ssd.img bs=1M count=100
+sudo mkfs.vfat -F 32 ssd.img
+
+# 2. Insere os softwares e o compositor (Ring 3) dentro do disco FAT32
+# (Requer o pacote mtools instalado)
+
+mcopy -i ssd.img explorer.elf ::/
+
+mcopy -i ssd.img tarefa.elf ::/
+
+# Adicione outros softwares aqui, ex: mcopy -i ssd.img app.elf ::/
+
+# 3. Cria a Imagem Mestre Bootável do S.O.
+
+rm -f disco_total.img
+dd if=/dev/zero of=disco_total.img bs=1M count=101
+
+# Injeta o Bootloader no Setor 0 e o Kernel no Setor 1
+
+dd if=boot.bin of=disco_total.img bs=512 count=1 conv=notrunc
+dd if=kernel.bin of=disco_total.img bs=512 seek=1 conv=notrunc
+
+# Injeta o disco FAT32 (ssd.img) a partir do setor 2048 (Offset de 1MB)
+# Isso protege o Bootloader/Kernel e permite que o S.O. encontre os arquivos.
+
+dd if=ssd.img of=disco_total.img seek=2048 conv=notrunc
+
+Parte 2: Convertendo para VirtualBox (.vdi) no Windows
+Com o disco_total.img criado, mova-o para uma pasta no Windows. Para que você não precise recriar a máquina virtual a cada nova compilação, vamos converter a imagem para o formato .vdi injetando um UUID Fixo.
+Abra o Prompt de Comando na pasta onde está a imagem e execute:
+
+"C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" convertfromraw disco_total.img disco_total.vdi --variant Fixed --uuid {f7cc1a54-2cd7-4dcd-b578-1cca32ad320c}
+
