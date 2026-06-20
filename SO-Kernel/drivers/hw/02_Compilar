@@ -1,0 +1,13 @@
+gcc -m64 -ffreestanding -fno-stack-protector -fno-pie -I. -c drivers/hw/ahci.c -o drivers/hw/ahci.o
+
+gcc -m64 -ffreestanding -fno-stack-protector -fno-pie -I. -c drivers/hw/pci.c -o drivers/hw/pci.o
+
+gcc -m64 -ffreestanding -fno-stack-protector -fno-pie -I. -c drivers/hw/pic.c -o drivers/hw/pic.o
+
+gcc -m64 -ffreestanding -fno-stack-protector -fno-pie -I. -c drivers/hw/xhci.c -o drivers/hw/xhci.o
+
+gcc -m64 -ffreestanding -fno-stack-protector -fno-pie -I. -c drivers/hw/nvme.c -o drivers/hw/nvme.o
+
+gcc -m64 -ffreestanding -fno-stack-protector -fno-pie -I. -c drivers/hw/disk.c -o drivers/hw/disk.o
+
+gcc -m64 -ffreestanding -fno-stack-protector -fno-pie -I. -c drivers/hw/serial.c -o drivers/hw/serial.o
